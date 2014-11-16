@@ -1,0 +1,53 @@
+﻿@model OSM.Web.ViewModels.Products.ProductViewModel
+@*@model PagedList.IPagedList<@model.ProductList>*@
+
+@Styles.Render("~/Content/PagedList.css")
+
+@{
+    ViewBag.Title = @OSM.Web.Resources.Shared.Common.Product;
+}
+
+
+<p>
+    @Html.ActionLink(@OSM.Web.Resources.Shared.Common.CreateNew, "Create")
+</p>
+
+@Html.Partial("~/Views/Shared/_ConfirmationDialog.cshtml")
+
+@using (Ajax.BeginForm
+
+            ("Index", "Product",
+            new AjaxOptions { HttpMethod = "Get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "gridContent" }))
+{
+    <div id="search-area">
+        <div >
+           
+            <p>
+                @OSM.Web.Resources.Products.Product.ProductName @Html.TextBox("SearchString", "", new { @id = "searchInput" })
+                @Html.DropDownList("CategoryId", new SelectList(@Model.Categories, "Id", "Name"), @OSM.Web.Resources.Products.Product.SelectCategory, new { id = "ddlCategries", @class = "dropdown" })
+                @Html.DropDownList("ProductId", new SelectList(@Model.Products, "Id", "Name"), "-Select-", new { id = "ddlProducts", @class = "dropdown" })
+                <input type="submit" value=@OSM.Web.Resources.Shared.Common.Search />   <input type="button" id="reset" value=@OSM.Web.Resources.Shared.Common.Reset />
+            </p>
+
+        </div>
+    </div>
+    <br />
+    <div id="grid-area">
+        @Html.Partial("_Product", Model)
+    </div>
+    
+}
+@if (ViewBag.MessageVM != null)
+{  
+    <input type="hidden" id="Message"  value="@ViewBag.MessageVM.Message" />
+    <input type="hidden" id="IsSaved" value="@ViewBag.MessageVM.IsSaved" />
+    <input type="hidden" id="IsUpdated" value="@ViewBag.MessageVM.IsUpdated" />
+    <input type="hidden" id="IsError" value="@ViewBag.MessageVM.IsError" />
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Common/confirmationDialog.js"></script>
+    <script src="~/Scripts/App/product.js"></script>
+}
+

@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "مركز خطوات صغيرة";
+    Layout = "~/Views/Shared/_ClinicLayout.cshtml";
+    ViewBag.ContactMenu = "current";
+}
+
+<div class="clear"></div>
+<div class="banner">
+    <div class="inner-banner">
+        <div class="note">Contact Us</div>
+        <div class="site-map">
+            You are here:<a href="index-2.html">Home</a> &gt; Contact Us
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div id="map" class="map1 margTop80"></div>
+<!-- Container -->
+<div class="wrapper ">
+    <div class="contact-row dark">
+        <div class="contact2 column4">
+            <h4>تواصلوا معنا</h4>
+            <div class="border"></div>
+            <p class="home">شارع الملك عبد العزيز</p>
+            <p class="phone2">+966 4445564</p>
+            <p class="mail">info@s-steps.com</p>
+        </div>
+
+        <div class="msg-form column8">
+            <h4>راسلونا</h4>
+            <div class="border"></div>
+            <form action="#" id="contactus">
+                <input type="text" id="name" data-value="اسم" class="contactus">
+                <input type="text" id="email" data-value="البريد الالكتروني" class="contactus" onblur="validateEmail(this);">
+                <input type="text" id="phone" data-value="رقم التواصل" class="contactus">
+                <textarea name="message" placeholder="الرسالة" id="message" class="contactus"></textarea>
+                <input type="button" value="ارسال" onclick="SendMessage();">
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<!-- End Wrapper -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="~/Scripts/App/gmap3.min.js"></script>
+<script type="text/javascript" src="~/Scripts/Functions/scriptIST.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.maskedinput-1.3.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#phone").mask("(999) 999-9999");
+    });
+</script>
+
+
+
+
+

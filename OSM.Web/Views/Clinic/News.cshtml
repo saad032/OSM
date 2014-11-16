@@ -1,0 +1,96 @@
+﻿@model OSM.Web.ViewModels.ES.NewsViewModel
+@{
+
+    ViewBag.Title = "معرض الصور و الفيديو";
+    ViewBag.NewsMenu = "current";
+
+    Layout = "~/Views/Shared/_ClinicLayout.cshtml";
+}
+<div class="banner">
+    <div class="inner-banner">
+        <div class="note">Blog</div>
+        <div class="site-map">
+            You are here:<a href="index-2.html">Home</a> &gt; Blog
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<!-- Container -->
+<div class="wrapper dark margTop100">
+    <div class="main-blog column12">
+        <input type="hidden" id="hdTotalCount" value="@Model.News"/>
+        @foreach (var item in Model.News)
+        {
+            <div class="blog-box">
+                <a href="#"><img src="~/Images/News/@item.ImageName" alt=""></a>
+                <div class="blog-text">
+                    <h4>@item.TitleA</h4>
+                    <div class="border"></div>
+                    <div class="post-meta">
+                        <div class="post-user">@item.CreatedBy</div>
+                        <div class="post-date">@item.CreatedDate.ToShortDateString()</div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="post-text" style="width: 810px !important">@Html.Raw(@item.DescriptionA)</div>
+                    <a href="/Clinic/SingleNews/@item.Id">للمزيد</a>
+                </div>
+            </div>
+        }
+        <div class="pagenation-page clearfix" style="float: right">
+            @*<ul style="float:right;">
+                <li><a href="#">50</a></li>
+                <li><a href="#">...</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">2</a></li>
+                <li class="active"><a href="#">1</a></li>
+            </ul>*@
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <!-- End Wrapper -->
+    <div class="clear">	</div>
+    <!-- Footer -->
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    $(window).load(function () {
+        $('.flexslider').flexslider();
+    });
+    $(function () {
+        var items = $('.blog-box');
+
+        var numItems = items.length;
+        var perPage = 5;
+
+        // only show the first 2 (or "first per_page") items initially
+        items.slice(perPage).hide();
+
+        // now setup your pagination
+        // you need that .pagination-page div before/after your table
+        $(".pagenation-page").pagination({
+            items: numItems,
+            itemsOnPage: perPage,
+            cssStyle: "light-theme",
+            onPageClick: function (pageNumber) { // this is where the magic happens
+                // someone changed page, lets hide/show trs appropriately
+                var showFrom = perPage * (pageNumber - 1);
+                var showTo = showFrom + perPage;
+
+                items.hide() // first hide everything, then show for the new page
+                     .slice(showFrom, showTo).show();
+            }
+        });
+    });
+</script>
+<script type="text/javascript" src="~/Scripts/App/accordion.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.slider1').bxSlider({
+            slideWidth: 370,
+            minSlides: 2,
+            maxSlides: 4,
+            slideMargin: 30
+        });
+    });</script>

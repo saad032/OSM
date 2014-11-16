@@ -1,0 +1,18 @@
+﻿@model OSM.Web.Models.General
+@{
+    Layout = "~/Views/Shared/_ClinicLayout.cshtml";
+    ViewBag.Title = "Our Vision";
+    ViewBag.OurVision = "current";
+}
+<div class="wrapper dark margTop100">
+    <div class="main-blog column12">
+        <div class="blog-box singlenewspage">
+            <h3>@Model.TitleA</h3>
+            <div>
+                @Html.Raw(@Model.DescriptionA)
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+

@@ -1,0 +1,70 @@
+﻿@model OSM.Web.ViewModels.ES.GalleryViewModel
+@{
+    ViewBag.Title = "We Care - Portfolio";
+    ViewBag.MediaMenu = "current";
+    Layout = "~/Views/Shared/_ClinicLayout.cshtml";
+}
+<div class="banner">
+    <div class="inner-banner">
+        <div class="note">Portfolio</div>
+        <div class="site-map">
+            You are here:<a href="index-2.html">Home</a> &gt; Portfolio
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<!-- Container -->
+<div class="wrapper margTop100">
+    <div id="container">
+        <ul id="filterOptions">
+            <li class="active"><a href="#" class="all">كل</a></li>
+            <li><a href="#" class="pictures">صور</a></li>
+            <li><a href="#" class="videos">فيديو</a></li>
+
+        </ul>
+
+        <div id="ourHolder">
+            @foreach (var item in Model.Galleries)
+            {
+                if ((@item.IsVideo))
+                {
+                    <div class="item videos">
+                        <div class="view view-two">
+                            <iframe width="270" height="190" src=@item.VideoUrl frameborder="0" allowfullscreen></iframe>
+                            <div class="mask">
+                                <a class="btn-icon" href="#"></a>
+                            </div>
+                        </div>
+                        <div class="port-span">
+                            <h3>@item.TitleA</h3>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="item pictures">
+                        <div class="view view-two">
+                            <img src="/Images/Gallery/@item.ImageName" alt="" />
+                            <div class="mask">
+                                <a class="btn-icon" href="#"></a>
+                            </div>
+                        </div>
+                        <div class="port-span">
+                            <h3>@item.TitleA</h3>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+<!-- End Wrapper -->
+
+
+<script type="text/javascript" charset="utf-8">
+    $(window).load(function () {
+        $('.flexslider').flexslider();
+    });
+</script>

@@ -1,0 +1,76 @@
+﻿@model OSM.Web.ViewModels.Products.ProductViewModel
+
+
+@{
+    ViewBag.Title = @OSM.Web.Resources.Shared.Common.Create;
+}
+
+<h2>@OSM.Web.Resources.Shared.Common.Create</h2>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@OSM.Web.Resources.Shared.Common.Product</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Product.Id)
+        <div class="form-group">
+            @Html.Label(@OSM.Web.Resources.Products.Product.CategoryId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Product.CategoryId, new SelectList(Model.Categories, "Id", "Name"), @OSM.Web.Resources.Products.Product.SelectCategory, new { id = "ddlCategries" })
+                @Html.ValidationMessageFor(model => model.Product.CategoryId)
+                @Html.ValidationMessageFor(model => model.Product.CategoryId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label(@OSM.Web.Resources.Products.Product.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.Name)
+                @Html.ValidationMessageFor(model => model.Product.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label(@OSM.Web.Resources.Products.Product.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.Description)
+                @Html.ValidationMessageFor(model => model.Product.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label(@OSM.Web.Resources.Products.Product.Price, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.Price)
+                @Html.ValidationMessageFor(model => model.Product.Price)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@OSM.Web.Resources.Shared.Common.Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(@OSM.Web.Resources.Shared.Common.BackToList, "Index")
+</div>
+
+@if (ViewBag.MessageVM != null)
+{
+    <input type="hidden" id="Message" value="@ViewBag.MessageVM.Message" />
+    <input type="hidden" id="IsSaved" value="@ViewBag.MessageVM.IsSaved" />
+    <input type="hidden" id="IsUpdated" value="@ViewBag.MessageVM.IsUpdated" />
+    <input type="hidden" id="IsError" value="@ViewBag.MessageVM.IsError" />
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
